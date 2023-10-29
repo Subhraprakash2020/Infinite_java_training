@@ -1,0 +1,8 @@
+package com.java.ejb;
+
+public class RoomMaster {
+	private String roomno;
+	private String roomtype;
+	private String status;
+	
+}

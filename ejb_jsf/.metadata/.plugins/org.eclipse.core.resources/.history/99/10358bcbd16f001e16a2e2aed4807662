@@ -1,0 +1,129 @@
+package com.java.ejb;
+
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+import javax.faces.context.FacesContext;
+import javax.naming.NamingException;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+
+
+
+
+public class PatientEjbImpl {
+	SessionFactory sf;
+	Session session;
+//	public String addPatientEjb(Patient patient,String dID) throws NamingException {
+//		DoctorEjbBeanRemote remote = RemoteHelper.lookupRemoteStatelessEmploy();
+//		patient.setDoctorid(dID);
+//		remote.addPatientDao(patient);
+//		 return "AddPatient.jsp?faces-redirect=true";
+//	}
+	
+	public String redirectPatient(String drId) throws NamingException {
+		DoctorEjbBeanRemote remote = RemoteHelper.lookupRemoteStatelessEmploy();
+		Map<String, Object> sessionMap = 
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		sessionMap.put("drId", drId);
+		 return "AddPatient.jsp?faces-redirect=true";
+	}
+	
+	public List<Patient> showPatientEjb() throws NamingException, ClassNotFoundException, SQLException{
+		DoctorEjbBeanRemote remote = RemoteHelper.lookupRemoteStatelessEmploy();
+		return remote.showPatient();
+	}
+	public String redirectRoomAllocation(String pid) throws NamingException {
+		DoctorEjbBeanRemote remote = RemoteHelper.lookupRemoteStatelessEmploy();
+		Map<String, Object> sessionMap = 
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		sessionMap.put("pid", pid);
+		 return "RoomAllocation.jsp?faces-redirect=true";
+	}
+	
+	public static int generateOtp() {
+		Random r = new Random( System.currentTimeMillis() );
+	    return ((1 + r.nextInt(2)) * 10000 + r.nextInt(10000));
+	}
+	
+	public String createAccountDao(Patient patient) {
+	    try {
+	    	sf = SessionHelper.getConnection();
+	        session = sf.openSession();
+	        Transaction transaction = session.beginTransaction();
+
+	        int otp = generateOtp();
+	        patient.setOtp(String.valueOf(otp));
+
+	        session.save(patient);
+
+	        // Send OTP via email
+	        String body = "Welcome to Mr/Miss  " + patient.getName() + "\r\n" +
+	                "Your OTP Generated Successfully..." + "\r\n" +
+	                "OTP is " + otp;
+	        MailSend.mailSend(patient.getEmail(), "Otp Send Successfully...", body);
+
+	        transaction.commit();
+	        return "PatientLogin.jsp?faces-redirect=true";
+	    } catch (Exception e) {
+	        // Handle exceptions
+	        e.printStackTrace();
+	        return "An error occurred.";
+	    } finally {
+	        if (session != null) {
+	            session.close();
+	        }
+	    }
+	}
+
+	
+//	public String verifyOtp(Patient patient) {
+//		SessionFactory sf= SessionHelper.getConnection();
+//		Session session=sf.openSession();
+//		Criteria cr=session.createCriteria(Patient.class);
+//		cr.add(Restrictions.eq("name", patient.getName()));
+//		cr.add(Restrictions.eq("otp", patient.getOtp()));
+//		cr.setProjection(Projections.rowCount());
+//		long count=(long)cr.uniqueResult();
+//		System.out.println(count);
+//		if(count==1) {
+//			String pid=patient.getPid();
+//			Map<String,Object>sessionMap=FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+//			sessionMap.put("pid",pid);
+//			return"ResetPassword.jsp?faces-redirect=true";
+//		}else {
+//			return "ShowDoctor.jsp?faces-redirect=true";
+//		}
+//	}
+	
+	public String verifyOtp(Patient patient) {
+		SessionFactory sf = SessionHelper.getConnection();
+		System.out.println("Inside otp verification");
+		sf = SessionHelper.getConnection();
+		session = sf.openSession();
+		Criteria cr = session.createCriteria(Patient.class);
+		cr.add(Restrictions.eq("name", patient.getName()));
+		cr.add(Restrictions.eq("otp", patient.getOtp()));
+		cr.setProjection(Projections.rowCount());
+		long count = (long)cr.uniqueResult();
+		System.out.println("count ==="+count);
+		if(count == 1) {
+			return"ResetPassword.jsp?faces-redirect=true";
+			
+		}
+		else {
+			return"DoctorShow.jsp?faces-redirect=true";
+		}
+	}
+
+    // Other methods, constructors, and Hibernate setup go here
+}
+

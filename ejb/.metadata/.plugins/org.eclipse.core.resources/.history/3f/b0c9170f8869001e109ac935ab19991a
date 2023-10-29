@@ -1,0 +1,10 @@
+package com.java.client;
+
+import org.jboss.ejb3.InitialContextFactory;
+
+public class Main {
+	public static void main(String[] args) {
+		CalculationRemote service = 
+				(CalculationRemote) new InitialContextFactory().lookup("HelloWorldBean/remote");
+	}
+}

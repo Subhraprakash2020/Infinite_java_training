@@ -1,0 +1,107 @@
+package com.java.ejb;
+
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
+
+import javax.faces.context.FacesContext;
+import javax.naming.NamingException;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+
+
+
+public class PatientEjbImpl {
+	SessionFactory sf;
+	Session session;
+//	public String addPatientEjb(Patient patient,String dID) throws NamingException {
+//		DoctorEjbBeanRemote remote = RemoteHelper.lookupRemoteStatelessEmploy();
+//		patient.setDoctorid(dID);
+//		remote.addPatientDao(patient);
+//		 return "AddPatient.jsp?faces-redirect=true";
+//	}
+	public String redirectPatient(String drId) throws NamingException {
+		DoctorEjbBeanRemote remote = RemoteHelper.lookupRemoteStatelessEmploy();
+		Map<String, Object> sessionMap = 
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		sessionMap.put("drId", drId);
+		 return "AddPatient.jsp?faces-redirect=true";
+	}
+	
+	public List<Patient> showPatientEjb() throws NamingException, ClassNotFoundException, SQLException{
+		DoctorEjbBeanRemote remote = RemoteHelper.lookupRemoteStatelessEmploy();
+		return remote.showPatient();
+	}
+	public String redirectRoomAllocation(String pid) throws NamingException {
+		DoctorEjbBeanRemote remote = RemoteHelper.lookupRemoteStatelessEmploy();
+		Map<String, Object> sessionMap = 
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		sessionMap.put("pid", pid);
+		 return "RoomAllocation.jsp?faces-redirect=true";
+	}
+	
+	public String createAccountDao(Patient patient) {
+        try {
+            session = sf.openSession();
+            Transaction transaction = session.beginTransaction();
+
+            String username = patient.getPid();
+            Patient patientFound = session.get(Patient.class, username);
+
+            if (patientFound == null) {
+                String pwd = EncryptPassword.getCode(patient.getPassword());
+
+                patient.setPassword(pwd);
+                patient.setStatus("PENDING"); // Default status
+
+                session.save(patient);
+
+                int otp = generateOtp();
+                Date currentDate = new Date();
+                OTP otpEntity = new OTP();
+                otpEntity.setPatient(patient);
+                otpEntity.setOtpCode(otp);
+                otpEntity.setGeneratedOn(currentDate);
+
+                session.save(otpEntity);
+
+                // Send OTP via email
+                String body = "Welcome to Mr/Miss  " + patient.getName() + "\r\n" +
+                        "Your OTP Generated Successfully..." + "\r\n" +
+                        "OTP is " + otp;
+                MailSend.mailOtp(patient.getEmail(), "Otp Send Successfully...", body);
+
+                transaction.commit();
+                return "Otp Send To Email...";
+            } else {
+                return "User-Name already Exists...";
+            }
+        } catch (Exception e) {
+            // Handle exceptions
+            e.printStackTrace();
+            return "An error occurred.";
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    // Generate a random OTP (you can replace this with your own OTP generation logic)
+    private int generateOtp() {
+        return (int) (Math.random() * 9000) + 1000;
+    }
+
+    // Other methods, constructors, and Hibernate setup go here
+}
+
+
+
+
+
+
+
+}

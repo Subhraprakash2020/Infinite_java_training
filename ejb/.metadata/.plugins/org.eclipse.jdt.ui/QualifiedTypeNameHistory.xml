@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="org.jboss.ejb3.InitialContextFactory"/>
+    <fullyQualifiedTypeName name="javax.naming.spi.InitialContextFactory"/>
+    <fullyQualifiedTypeName name="org.jboss.naming.InitialContextFactoryBean"/>
+    <fullyQualifiedTypeName name="javax.naming.InitialContext"/>
+    <fullyQualifiedTypeName name="java.io.Serializable"/>
+    <fullyQualifiedTypeName name="java.util.ResourceBundle"/>
+    <fullyQualifiedTypeName name="java.sql.DriverManager"/>
+    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+    <fullyQualifiedTypeName name="java.sql.SQLException"/>
+    <fullyQualifiedTypeName name="com.java.ejb.Employ"/>
+    <fullyQualifiedTypeName name="org.jboss.profileservice.plugins.management.AbstractTemplateCreator"/>
+    <fullyQualifiedTypeName name="javax.ejb.Remote"/>
+</qualifiedTypeNameHistroy>

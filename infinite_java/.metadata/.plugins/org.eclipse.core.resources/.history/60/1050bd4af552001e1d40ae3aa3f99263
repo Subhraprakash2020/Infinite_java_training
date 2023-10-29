@@ -1,0 +1,5 @@
+package com.java.inventory;
+
+public interface OrderDAO {
+	String createOrder(Order order);
+}

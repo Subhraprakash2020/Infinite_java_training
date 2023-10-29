@@ -1,0 +1,16 @@
+package com.java.ejb;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+public class CustPolicyImpl {
+	SessionFactory sf;
+	Session session;
+	
+	public String addCustomerPolicy(CustPolicy custpolicy) {
+		sf = SessionHelper.getConnection();
+		Transaction trans = session.beginTransaction();
+		
+	}
+}

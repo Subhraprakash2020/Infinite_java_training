@@ -1,0 +1,9 @@
+package com.java.hms;
+
+public class Room {
+	private String roomno;
+	private String roomtype;
+	private String status;
+	
+	
+}

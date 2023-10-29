@@ -1,0 +1,15 @@
+package com.java.client;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import org.jboss.naming.InitialContextFactoryBean;
+
+import org.jboss.naming.InitialContextFactoryBean;
+
+public class Main {
+	public static void main(String[] args) {
+		CalculationRemote service = 
+				(CalculationRemote) new InitialContextFactoryBean().lookup("Calculation/remote");
+	}
+}

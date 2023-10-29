@@ -1,0 +1,24 @@
+package com.java.hms;
+
+import java.util.Map;
+
+import javax.faces.context.FacesContext;
+import javax.transaction.Transaction;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+public class PatientDaoImpl {
+	SessionFactory sf;
+	Session session;
+	
+	public String addPatient(Patient patient) {
+		sf = SessionHelper.getConnection();
+		session = sf.openSession();
+		Transaction trans = session.beginTransaction();
+		session.save(patient);
+		trans.commit();
+		return "EmployShow.xhtml?faces-redirection=true";
+	}
+}

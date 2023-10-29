@@ -1,0 +1,7 @@
+package com.java.ejb;
+
+public class Snippet {
+	List<Room> showRoomType() throws ClassNotFoundException, SQLException;
+		List<Room> showRoomNo() throws ClassNotFoundException, SQLException;
+}
+

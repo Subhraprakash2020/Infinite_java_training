@@ -1,0 +1,7 @@
+package com.java.ejb;
+
+public class Snippet {
+	String addPatientDao(Patient patient) throws ClassNotFoundException, SQLException;
+	
+}
+

@@ -1,0 +1,62 @@
+package com.java.inventory;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class OrederImpl implements OrderDAO{
+	
+	Connection connection;
+	PreparedStatement pst;
+	
+	@Override
+	public String createOrder(String stockId, int QtyOrd) throws ClassNotFoundException, SQLException {
+		
+		
+		connection = ConnectionHelper.getConnection();
+		
+		String checkStock = "Select QuantityAvail from stock where stociId = ?";
+		pst = connection.prepareStatement(checkStock);
+		pst.setString(1, stockId);
+		ResultSet stockResultSet = pst.executeQuery();
+		
+		if(stockResultSet == pst.executeQuery()) {
+			int availableQuantity = stockResultSet.getInt("QuantityAvail");
+			if(availableQuantity >= QtyOrd) {
+				String getMaxOrderIdQuery = "SELECT MAX(OrderId) FROM Orders";
+				pst = connection.prepareStatement(getMaxOrderIdQuery);
+				ResultSet orderResultSet = pst.executeQuery();
+				int maxOrderId = 0;
+				 if (orderResultSet.next()) {
+	                    String maxOrderIdStr = orderResultSet.getString(1);
+	                    if (maxOrderIdStr != null && maxOrderIdStr.matches("S\\d+")) {
+	                        maxOrderId = Integer.parseInt(maxOrderIdStr.substring(1));
+	                    }
+	                }
+	                maxOrderId++;
+	                String newOrderId = String.format("S%03d", maxOrderId);
+			}
+		}
+		
+		String getMaxStockIdQuery = "SELECT MAX(OrderId) FROM order";
+		pst = connection.prepareStatement(getMaxStockIdQuery);
+		ResultSet resultSet = pst.executeQuery();
+		 int maxOrderId = 0;
+         if (resultSet.next()) {
+             String maxStockIdStr = resultSet.getString(1);
+             if (maxStockIdStr != null && maxStockIdStr.matches("S\\d+")) {
+            	 maxOrderId = Integer.parseInt(maxStockIdStr.substring(1));
+             }
+         }
+         maxOrderId++;
+        String newOrderId = String.format("S%03d", maxOrderId);
+        
+        String cmd = ""
+        
+        
+        
+		return null;
+	}
+
+}

@@ -1,0 +1,17 @@
+package com.java.client;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+public class Main {
+	public static void main(String[] args) {
+		try {
+			CalculationRemote service = 
+					(CalculationRemote) new InitialContext().lookup("Calculation/remote");
+			System.out.println(service.sum(2, 3));
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

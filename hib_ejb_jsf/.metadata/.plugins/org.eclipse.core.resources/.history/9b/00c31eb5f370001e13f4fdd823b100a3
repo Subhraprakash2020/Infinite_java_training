@@ -1,0 +1,22 @@
+package com.java.ejb;
+
+import java.util.List;
+
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+
+/**
+ * Session Bean implementation class EmployBean
+ */
+@Stateless
+@Remote(EmployBeanRemote.class)
+
+public class InsuranceBean implements InsuranceBeanRemote{
+
+	@Override
+	public List<Insurance> showInsurance() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

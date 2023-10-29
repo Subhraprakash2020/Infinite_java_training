@@ -1,0 +1,56 @@
+package com.java.inventory;
+
+import java.sql.SQLException;
+import java.util.Scanner;
+
+public class PlaceOrderMain {
+
+    public static void main(String[] args) {
+    	OrderDAO orderDAO = new OrederImpl(); // Replace with your actual implementation
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            while (true) {
+                System.out.print("Enter the stock ID to order (or 'q' to quit): ");
+                String stockIdToOrder = scanner.next();
+
+                if (stockIdToOrder.equalsIgnoreCase("q")) {
+                    break; // Exit the loop if the user enters 'q'
+                }
+
+                System.out.print("Enter the quantity to order: ");
+                int quantityToOrder = scanner.nextInt();
+
+                String orderId = orderDAO.createOrder(stockIdToOrder, quantityToOrder);
+
+                if (orderId != null) {
+                    System.out.println("Order placed successfully. Order ID: " + orderId);
+                } else {
+                    System.out.println("Order not placed. Insufficient quantity or other issues.");
+                }
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        } finally {
+            scanner.close(); // Close the scanner when done
+        }
+        
+//        Scanner sc = new Scanner(System.in);
+//		String stockId;
+//		int quantityOrder;
+//		
+//		Order order = new Order();
+//		System.out.println("Enter stockId ");
+//		order.setStockId(sc.next());
+//		System.out.println("Ente quantity order ");
+//		order.setQtyOrd(sc.nextInt());
+//		
+//		OrderDAO dao = new OrederImpl();
+//		try {
+//			System.out.println(dao.createOrder(stockId, quantityOrder));
+//		} catch (ClassNotFoundException | SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+    }
+}

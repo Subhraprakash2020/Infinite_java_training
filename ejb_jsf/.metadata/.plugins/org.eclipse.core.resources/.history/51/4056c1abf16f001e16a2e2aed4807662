@@ -1,0 +1,8 @@
+package com.java.ejb;
+
+public class RoomTypeTest {
+	public static void main(String[] args) {
+		RoomDaoImpl impl = new RoomDaoImpl();
+		System.out.println(impl.showRoomType());
+	}
+}

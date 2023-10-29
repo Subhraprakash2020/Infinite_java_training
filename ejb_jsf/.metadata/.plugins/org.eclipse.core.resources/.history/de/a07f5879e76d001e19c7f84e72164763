@@ -1,0 +1,48 @@
+package com.java.ejb;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.faces.event.ValueChangeEvent;
+import javax.naming.NamingException;
+
+public class RoomEjbImpl {
+	 private String localCode;
+	    private List<Room> roomList;
+
+	    // Getter and Setter for localCode
+	    public String getLocalCode() {
+	        return localCode;
+	    }
+
+	    public void setLocalCode(String localCode) {
+	        this.localCode = localCode;
+	    }
+
+	    // Getter and Setter for roomList
+	    public List<Room> getRoomList() {
+	        return roomList;
+	    }
+
+	    public void setRoomList(List<Room> roomList) {
+	        this.roomList = roomList;
+	    }
+
+	    // Method to retrieve room data based on room type
+	    public void roomLocaleCodeChanged() throws ClassNotFoundException, NamingException, SQLException {
+	        if (localCode != null && !localCode.isEmpty()) {
+	            roomList = showRoomNoEjb(localCode);
+	        } else {
+	            // Handle the case where localCode is empty
+	        }
+	    }
+	public List<Room> showRoomTypeEjb() throws NamingException, ClassNotFoundException, SQLException{
+		DoctorEjbBeanRemote remote = RemoteHelper.lookupRemoteStatelessEmploy();
+		return remote.showRoomType();
+	}
+	public List<Room> showRoomNoEjb(String roomType) throws NamingException, ClassNotFoundException, SQLException{
+		DoctorEjbBeanRemote remote = RemoteHelper.lookupRemoteStatelessEmploy();
+		return remote.showRoomNo(roomType);
+	}
+	
+}

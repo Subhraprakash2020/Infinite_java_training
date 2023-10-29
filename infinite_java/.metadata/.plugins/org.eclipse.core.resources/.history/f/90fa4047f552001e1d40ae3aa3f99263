@@ -1,0 +1,16 @@
+package com.java.inventory;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+public class OrederImpl implements OrderDAO{
+	
+	Connection connection;
+	PreparedStatement pst;
+	@Override
+	public String createOrder(Order order) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

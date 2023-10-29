@@ -1,0 +1,84 @@
+package com.java.cms;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+
+import java.util.*;
+
+import javax.faces.event.ValueChangeEvent;
+
+public class VendorDAOImpl {
+	
+	SessionFactory	sessionFactory;
+	Session session;
+	
+	private String localCode;
+	private int venId;
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+	public Session getSession() {
+		return session;
+	}
+	public void setSession(Session session) {
+		this.session = session;
+	}
+	public String getLocalCode() {
+		return localCode;
+	}
+	public void setLocalCode(String localCode) {
+		this.localCode = localCode;
+	}
+	public int getVenId() {
+		return venId;
+	}
+	public void setVenId(int venId) {
+		this.venId = venId;
+	}
+	
+	
+	public List<Vendor> showVendorDao() {
+		sessionFactory = SessionHelper.getConnection();
+		session = sessionFactory.openSession();
+		Criteria criteria = session.createCriteria(Vendor.class);
+		List<Vendor> vendorList = criteria.list();
+		System.out.println(vendorList);
+		return vendorList;
+	}
+	
+	public int getVedorId(String vendorname) {
+		sessionFactory = SessionHelper.getConnection();
+		session = sessionFactory.openSession();
+		Criteria criteria  = session.createCriteria(Vendor.class);
+		criteria.add(Restrictions.eq("venname",vendorname));
+		Vendor vendor = (Vendor) criteria.uniqueResult();
+		return vendor.getVenid();
+		
+	}
+	
+	public void employLocaleCodeChanged(ValueChangeEvent e){
+		//assign new value to localeCode
+		System.out.println("Hi");
+		this.localCode = e.getNewValue().toString();
+		System.out.println(this.localCode);
+		this.venId = getVedorId(localCode);
+		System.out.println(this.venId);
+	}
+	public List<String> showVendorNames() {
+		sessionFactory = SessionHelper.getConnection();
+		session = sessionFactory.openSession();
+		Criteria criteria = session.createCriteria(Vendor.class);
+		Projection projection = Projections.property("venname"); 
+		criteria.setProjection(projection); 
+		List<String> list = criteria.list();
+		System.out.println(list);
+		return list;
+	}
+}

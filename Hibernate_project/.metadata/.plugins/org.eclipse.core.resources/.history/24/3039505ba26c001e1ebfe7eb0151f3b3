@@ -1,0 +1,7 @@
+package com.java.hms;
+
+public class Doctors {
+	private int drid;
+	private String drname;
+	private String dept;
+}

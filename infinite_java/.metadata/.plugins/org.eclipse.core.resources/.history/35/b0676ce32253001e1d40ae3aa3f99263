@@ -1,0 +1,30 @@
+package com.java.inventory;
+
+import java.sql.SQLException;
+import java.util.Scanner;
+
+public class PlaceOrderMain {
+
+    public static void main(String[] args) {
+    	
+    
+        
+       Scanner sc = new Scanner(System.in);
+		String stockId;
+		int quantityOrder;
+		
+		Order order = new Order();
+		System.out.println("Enter stockId ");
+		order.setStockId(sc.next());
+		System.out.println("Ente quantity order ");
+		order.setQtyOrd(sc.nextInt());
+		
+		OrderDAO dao = new OrederImpl();
+		try {
+			System.out.println(dao.createOrder(stockId, quantityOrder));
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+}

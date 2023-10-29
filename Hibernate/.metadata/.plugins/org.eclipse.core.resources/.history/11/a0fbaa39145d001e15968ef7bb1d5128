@@ -1,0 +1,24 @@
+package com.java.agent;
+
+import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
+
+public class AgentDAOImpl implements AgentDAO{
+	SessionFactory sf;
+	Session session;
+
+	@Override
+	public List<Agent> showAgent() {
+		sf = SessionHelper.getConnection();
+		System.out.println("COnnected");
+		session = sf.openSession();
+		Criteria cr = session.createCriteria(getClass());
+		List<Agent> agentList = cr.list();
+		return agentList;
+	}
+
+}

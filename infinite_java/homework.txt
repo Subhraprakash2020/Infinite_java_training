@@ -1,0 +1,58 @@
+9) What is the purpose of optional in java, write your own example
+
+ 
+java.util.Optional is a class introduced in Java 8 to represent an optional value, which can be either present or absent. The purpose of Optional is to help developers write more robust and expressive code when dealing with potentially null values, reducing the likelihood of null pointer exceptions. It encourages developers to explicitly handle the absence of a value rather than simply checking for null.
+import java.util.Optional;
+
+public class OptionalExample {
+    public static void main(String[] args) {
+        // Simulate a method that may or may not return a value
+        Optional<String> result = getValueFromMethod();
+
+        // Check if the value is present and print it
+        if (result.isPresent()) {
+            String value = result.get();
+            System.out.println("Value is present: " + value);
+        } else {
+            System.out.println("Value is absent.");
+        }
+
+        // Using ifPresent to handle the presence of a value
+        result.ifPresent(val -> System.out.println("Value is present: " + val));
+    }
+
+    // A method that may or may not return a value
+    public static Optional<String> getValueFromMethod() {
+        // Simulate a condition where the value is absent
+        if (someConditionIsMet()) {
+            return Optional.empty();
+        } else {
+            return Optional.of("Hello, World!");
+        }
+    }
+
+    public static boolean someConditionIsMet() {
+        // Simulate a condition where the value is absent
+        return false;
+    }
+}
+
+
+8) What does the hashcode() method?
+
+The hashCode() method is a Java Integer class method which returns the hash code for the given inputs. There are two different types of Java hashCode() method which can be differentiated depending on its parameter.
+
+public class IntegerHashCodeExample1 {  
+    public static void main(String[] args)  
+    {  
+        //Create integer object  
+        Integer i = new Integer("155");  
+        //Returned hash code value for this object   
+        int hashValue = i.hashCode();  
+        System.out.println("Hash code Value for object is: " + hashValue);  
+    }  
+}  
+
+7) How can we sort the element of an object?
+
+In Java, you can sort the elements of an object by implementing the Comparable interface or by using a custom Comparator if the object class does not implement Comparable. The sorting can be done using methods provided by the Collections class for collections like List or by using Arrays.sort() for arrays.

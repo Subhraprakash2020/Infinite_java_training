@@ -1,0 +1,11 @@
+package com.java.agent;
+
+public class Agent {
+	private int agentId;
+	private String name;
+	private String city;
+	private Gender gender;
+	private int maritialStatus;
+	private double basic;
+	
+}

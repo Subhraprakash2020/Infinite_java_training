@@ -1,0 +1,11 @@
+package com.java.hib;
+
+public class LoginDAOImpl implements LoginDAO{
+
+	@Override
+	public String addUser(Login login) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

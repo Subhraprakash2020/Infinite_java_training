@@ -1,0 +1,25 @@
+package com.java.ejb;
+
+import java.util.List;
+
+import javax.naming.NamingException;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+
+
+public class EjbInsurance {
+	public List<Insurance> showEjbInsurance() throws NamingException{
+		InsuranceBeanRemote remote = RemoteHelper.lookupRemoteStatelessEmploy();
+		return remote.showInsurance();
+	}
+	
+	public List<Insurance> showInsuranceDao() {
+		SessionFactory sf = SessionHelper.getConnection();
+		Session session = sf.openSession();
+		Criteria cr = session.createCriteria(Insurance.class);
+		return cr.list();
+	}
+}

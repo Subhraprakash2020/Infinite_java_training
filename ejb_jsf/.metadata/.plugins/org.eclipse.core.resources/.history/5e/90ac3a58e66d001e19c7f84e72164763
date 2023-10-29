@@ -1,0 +1,36 @@
+package com.java.ejb;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.faces.event.ValueChangeEvent;
+import javax.naming.NamingException;
+
+public class RoomEjbImpl {
+	public List<Room> showRoomTypeEjb() throws NamingException, ClassNotFoundException, SQLException{
+		DoctorEjbBeanRemote remote = RemoteHelper.lookupRemoteStatelessEmploy();
+		return remote.showRoomType();
+	}
+	public List<Room> showRoomNoEjb(String roomType) throws NamingException, ClassNotFoundException, SQLException{
+		DoctorEjbBeanRemote remote = RemoteHelper.lookupRemoteStatelessEmploy();
+		return remote.showRoomNo(roomType);
+	}
+	public String localCode;
+	
+	
+	
+	public String getLocalCode() {
+		return localCode;
+	}
+
+	public void setLocalCode(String localCode) {
+		this.localCode = localCode;
+	}
+	
+	
+	public void roomLocaleCodeChanged(ValueChangeEvent e){
+		//assign new value to localeCode
+		this.localCode = e.getNewValue().toString();
+		System.out.println(this.localCode);
+	}
+}

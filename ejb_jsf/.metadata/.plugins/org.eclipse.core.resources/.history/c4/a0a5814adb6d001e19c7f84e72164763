@@ -1,0 +1,51 @@
+package com.java.ejb;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class RoomDaoImpl implements RoomDAO{
+	
+	Connection connection;
+	PreparedStatement pst;
+	
+	@Override
+	public List<Room> showRoomType() throws ClassNotFoundException, SQLException {
+		connection = ConnectionHelper.getConnection();
+		String cmd = "select DISTINCT room_type from room_master";
+		pst = connection.prepareStatement(cmd);
+		ResultSet rs = pst.executeQuery();
+		List<Room> roomList = new ArrayList<Room>();
+		Room room = null;
+		while(rs.next()) {
+			room = new Room();
+			room.setRoomno(rs.getString("room_no"));
+			room.setRoomtype(rs.getString("room_type"));
+			room.setStatus(rs.getString("status"));
+			roomList.add(room);
+		}
+		return roomList;
+	}
+
+	@Override
+	public List<Room> showRoomNo() throws ClassNotFoundException, SQLException {
+		connection = ConnectionHelper.getConnection();
+		String cmd = "select room_no from room_master where room_type = ? and status='VACANT'";
+		pst = connection.prepareStatement(cmd);
+		ResultSet rs = pst.executeQuery();
+		List<Room> roomList = new ArrayList<Room>();
+		Room room = null;
+		while(rs.next()) {
+			room = new Room();
+			room.setRoomno(rs.getString("room_no"));
+			room.setRoomtype(rs.getString("room_type"));
+			room.setStatus(rs.getString("status"));
+			roomList.add(room);
+		}
+		return roomList;
+	}
+	
+}

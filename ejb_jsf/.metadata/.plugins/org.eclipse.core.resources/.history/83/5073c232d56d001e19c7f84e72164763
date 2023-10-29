@@ -1,0 +1,13 @@
+package com.java.ejb;
+
+import java.util.List;
+
+public class RoomDaoImpl implements RoomDAO{
+
+	@Override
+	public List<Room> showRoom() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}

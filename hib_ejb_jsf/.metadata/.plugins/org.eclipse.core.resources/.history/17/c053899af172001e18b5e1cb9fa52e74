@@ -1,0 +1,24 @@
+package com.java.ejb;
+
+import javax.faces.context.FacesContext;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+public class CustPolicyImpl {
+	SessionFactory sf;
+	Session session;
+	
+	 public String redirectToTakePolicy(int insId) {
+		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		sessionMap.put("insId", insId);
+		return "takePolicy.jsp?faces-redirect=true";
+	}
+	
+	public String addCustomerPolicy(CustPolicy custpolicy) {
+		sf = SessionHelper.getConnection();
+		Transaction trans = session.beginTransaction();
+		
+	}
+}

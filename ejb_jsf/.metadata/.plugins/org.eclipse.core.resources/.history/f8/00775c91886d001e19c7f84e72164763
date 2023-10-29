@@ -1,0 +1,11 @@
+package com.java.ejb;
+
+public class PatientDaoImpl implements PatientDAO{
+
+	@Override
+	public String addPatatientDao(Patient patient) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -1,0 +1,16 @@
+<%@page contentType="text/html"%>
+<%@page pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>JSP Page</title>
+</head>
+<body>
+    <h1>Home Page</h1>
+    <h2>Welcome to our website</h2>
+    <a href="CustomerLogin.jsp">Customer Login</a><br>
+    <a href="VendorLogin.jsp">Vendor Login</a>
+</body>
+</html>

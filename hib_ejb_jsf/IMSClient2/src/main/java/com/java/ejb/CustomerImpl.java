@@ -1,0 +1,160 @@
+package com.java.ejb;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+import javax.faces.context.FacesContext;
+
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+
+public class CustomerImpl {
+	SessionFactory sf;
+	Session session;
+	public static int generateOtp() {
+		Random r = new Random(System.currentTimeMillis());
+		return ((1 + r.nextInt(2)) * 10000 + r.nextInt(10000));
+	}
+	
+	public String createAccount(Customer customer) {
+		sf = SessionHelper.getConnection();
+		session = sf.openSession();
+		Transaction trans = session.beginTransaction();
+		session.save(customer);
+		
+		int otp = generateOtp();
+		String body = "Welcome to Mr/Miss  " + customer.getFirstName() + "\r\n" + "Your OTP Generated Successfully..."
+				+ "\r\n" + "OTP is " + otp;
+		MailSend.mailSend(customer.getEmail(), "Otp Send Successfully...", body);
+		
+		trans.commit();
+		
+		sf = SessionHelper.getConnection();
+		session = sf.openSession();
+		Transaction trans2 = session.beginTransaction();
+		CustAuth cust = new CustAuth();
+//		cust.setCustid(customer.getCustId());
+		cust.setCustid(customer.getCustId());
+		cust.setUserName(customer.getUserName());
+		cust.setOtp(String.valueOf(otp));
+		session.save(cust);
+		session.getTransaction().commit();
+		
+		return "ResetPassword.jsp?faces-redirect=true";
+		
+	}
+	public CustAuth searchUsername(String userName) {
+		SessionFactory sf = SessionHelper.getConnection();
+		Session session = sf.openSession();
+		Criteria cr = session.createCriteria(CustAuth.class);
+		cr.add(Restrictions.eq("userName", userName));
+		CustAuth custauth = (CustAuth) cr.uniqueResult();
+		return custauth;
+	}
+	
+
+
+//	public String verifyOtp(CustAuth custauth) {
+//		SessionFactory sf= SessionHelper.getConnection();
+//		Session session=sf.openSession();
+//		Criteria cr=session.createCriteria(CustAuth.class);
+//		cr.add(Restrictions.eq("userName", custauth.getUserName()));
+//		cr.add(Restrictions.eq("otp", custauth.getOtp()));
+//		cr.setProjection(Projections.rowCount());
+//		long count=(long)cr.uniqueResult();
+//		System.out.println(count);
+//		if(count==1) {
+//			String userName=custauth.getUserName();
+//			Map<String,Object>sessionMap=FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+//			sessionMap.put("userName",userName);
+//			return"ResetPassword.jsp?faces-redirect=true";
+//		}else {
+//			return "ShowDoctor.jsp?faces-redirect=true";
+//		}
+//	}
+	
+
+	public String verifyOtp(CustAuth custauth) {
+		 Map<String, Object> sessionMap =
+					FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		System.out.println("Inside verifyotp");
+		SessionFactory sf = SessionHelper.getConnection();
+		sf = SessionHelper.getConnection();
+		session = sf.openSession();
+		Criteria cr = session.createCriteria(CustAuth.class);
+		System.out.println("123333333333");
+		cr.add(Restrictions.eq("userName", custauth.getUserName()));
+		Projection projection = Projections.property("otp");
+		cr.setProjection(projection);
+		String otp = (String)cr.uniqueResult();
+		System.out.println("786358395387593");
+		String pass = custauth.getPasscode();
+		String pwd = EncryptPassword.getCode(pass);
+		session.close();
+		sf.close();
+		if(otp.equals(custauth.getOtp())) {
+			
+			CustAuth custFound = searchUsername(custauth.getUserName());
+			custFound.setPasscode(pwd);
+			custFound.setStatus("ACTIVE");
+			sf = SessionHelper.getConnection();
+			session = sf.openSession();
+			Transaction trans = session.beginTransaction();
+			session.update(custFound);
+			trans.commit();
+			return "LoginCustomer.jsp?faces-redirect=true";
+		}
+		else {
+			return "Hello.jsp.jsp?faces-redirect=true";
+		}
+		
+	}
+	
+	public String loginDao(CustAuth custauth) {
+		SessionFactory sf = SessionHelper.getConnection();
+		sf = SessionHelper.getConnection();
+		session = sf.openSession();
+		 Map<String, Object> sessionMap =
+					FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+	     
+
+	    try {
+	    	Transaction tx = session.beginTransaction();
+
+	        Criteria criteria = session.createCriteria(CustAuth.class);
+	        criteria.add(Restrictions.eq("userName", custauth.getUserName()));
+	        criteria.add(Restrictions.eq("passcode", EncryptPassword.getCode(custauth.getPasscode())));
+
+	        criteria.setProjection(Projections.rowCount());
+	        Long count = (Long) criteria.uniqueResult();
+
+	        if (count == 1) {
+	        	sessionMap.put("loggedCustomer", custauth.getUserName());
+	        	sessionMap.put("customerId",custauth.getCustid());
+	        	
+	            return "Dashboard.jsp?faces-redirect:true";
+	        } else {
+	            return "Invalid Credentials";
+	        }
+	   
+	    } finally {
+	        session.close();
+	    }
+	}
+	
+	
+
+
+	
+
+	
+	
+
+}

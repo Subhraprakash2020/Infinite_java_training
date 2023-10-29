@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="jakarta.ws.rs.core.Cookie"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.Cookie"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+    <fullyQualifiedTypeName name="com.java.state.LoginDAO"/>
+    <fullyQualifiedTypeName name="com.mysql.cj.xdevapi.PreparableStatement"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="com.java.state.ConnectionHelper"/>
+    <fullyQualifiedTypeName name="com.java.otp.LoginDAO"/>
+    <fullyQualifiedTypeName name="com.java.otp.ConnectionHelper"/>
+    <fullyQualifiedTypeName name="com.java.otp.EncryptPassword"/>
+    <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
+    <fullyQualifiedTypeName name="java.sql.Date"/>
+    <fullyQualifiedTypeName name="java.io.PrintWriter"/>
+    <fullyQualifiedTypeName name="com.java.servlets.SignUpServlet"/>
+    <fullyQualifiedTypeName name="com.java.servlets.Customer"/>
+    <fullyQualifiedTypeName name="com.java.servlets.CustomerDAO"/>
+    <fullyQualifiedTypeName name="com.java.servlets.CustomerDAOImpl"/>
+</qualifiedTypeNameHistroy>

@@ -1,0 +1,65 @@
+package com.java.ejb;
+
+import java.util.List;
+import java.util.Map;
+
+import javax.faces.context.FacesContext;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
+
+public class InsurancePlanImpl {
+	SessionFactory sf;
+	Session session;
+	public List<InsurancePlan> showInsurancePlanDao() {
+		SessionFactory sf = SessionHelper.getConnection();
+		Session session = sf.openSession();
+		Criteria cr = session.createCriteria(InsurancePlan.class);
+		return cr.list();
+	}
+	public String getInsurancePlans(int insuranceId) {
+		sf = SessionHelper.getConnection();
+		session = sf.openSession();
+		Map<String,Object> sessionMap =
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap();	
+		Criteria cr = session.createCriteria(InsurancePlan.class);
+		cr.add(Restrictions.eq("insId", insuranceId));
+		List<InsurancePlan>insList=cr.list();
+		sessionMap.put("insList", insList);
+ 
+		return"ShowPlan.jsp?faces-redirect=true";		
+	}
+	
+	public String bookPolicy(InsurancePlan insPlan) {
+	    sf = SessionHelper.getConnection();
+	    session = sf.openSession();
+	    Transaction trans = session.beginTransaction();
+	    
+	    String policymode = insPlan.getPaymode();
+	    double amount = policy.getInsAmount();
+	    double price = 0.0;
+
+	    if (policymode.equals("MONTHLY")) {
+	        price = amount / 12;
+	    } else if (policymode.equals("QUARTERLY")) {
+	        price = amount / 4;
+	    } else if (policymode.equals("HALFYEARLY")) {
+	        price = amount / 2;
+	    } else if (policymode.equals("YEARLY")) {
+	        price = amount;
+	    } else {
+	        // Handle unsupported pay modes or provide an error message.
+	        return "ErrorPage.jsp?faces-redirect=true";
+	    }
+	    
+	    policy.setInitialAmount(price);
+	    session.save(policy);
+	    session.getTransaction().commit();
+	    
+	    return "ShowCustomerPolicy.jsp?faces-redirect=true";
+	}
+
+}

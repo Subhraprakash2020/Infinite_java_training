@@ -1,0 +1,13 @@
+package com.java.ejb;
+
+public class Customer {
+	private int custId;
+	private String firstName;
+	private String lastName;
+	private String gender;
+	private String dob;
+	private String userName;
+	private String email;
+	private String status;
+	
+}

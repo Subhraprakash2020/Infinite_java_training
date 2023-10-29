@@ -1,0 +1,23 @@
+package com.java.ejb;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.util.List;
+
+public class DoctorsDaoImpl implements DoctorsDAO{
+	
+	Connection connection;
+	PreparedStatement pst;
+	
+	@Override
+	public List<Doctors> showDoctorsDao() {
+		connection = ConnectionHelper.getConnection();
+		String cmd = "select * from doctor_master";
+		pst = connection.prepareStatement(cmd);
+		ResultSet rs = pst.executeQuery();
+		List<Employ> employList = new ArrayList<Employ>();
+		Employ employ = null;
+		return null;
+	}
+
+}

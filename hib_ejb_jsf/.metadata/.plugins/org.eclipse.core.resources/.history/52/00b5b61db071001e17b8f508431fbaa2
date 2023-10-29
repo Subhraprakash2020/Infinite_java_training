@@ -1,0 +1,53 @@
+package com.java.ejb;
+
+import java.util.Random;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+public class CustomerImpl {
+	SessionFactory sf;
+	Session session;
+	
+	public static int generateOtp() {
+		Random r = new Random(System.currentTimeMillis());
+		return ((1 + r.nextInt(2)) * 10000 + r.nextInt(10000));
+	}
+	
+	public String createAccount(Customer customer) {
+		sf = SessionHelper.getConnection();
+
+		session = sf.openSession();
+
+		Transaction trans = session.beginTransaction();
+
+		
+//		Date obj = customer.getDateOfbirth();
+
+//		System.out.println(obj);
+
+//		java.sql.Date sqlDate = new java.sql.Date(obj.getTime());
+
+//		customer.setDateOfbirth(sqlDate);
+
+		session.save(customer);
+
+
+		String subject = "Welcome to Life Insurance ";
+
+		String messageText = "Hello,\n\nThank you for signing up in our LicApp. Your otp is It is "
+
+				+ "valid for 10 minuetes only dont share your  otp with others";
+
+		MailSend.mailSend(customer.getEmail(), subject, messageText);
+
+	
+
+		session.getTransaction().commit();
+
+			
+
+		return"CustomerAuth.jsp?faces-redirect=true";
+	}
+}

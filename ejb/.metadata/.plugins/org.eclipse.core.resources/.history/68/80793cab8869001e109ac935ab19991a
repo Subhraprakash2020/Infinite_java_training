@@ -1,0 +1,10 @@
+package com.java.client;
+
+import javax.naming.InitialContext;
+
+public class Main {
+	public static void main(String[] args) {
+		CalculationRemote service = 
+				(CalculationRemote) new InitialContext().lookup("Calculation/remote");
+	}
+}

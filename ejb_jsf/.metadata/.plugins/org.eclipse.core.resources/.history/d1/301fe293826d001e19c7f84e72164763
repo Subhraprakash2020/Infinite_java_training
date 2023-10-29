@@ -1,0 +1,13 @@
+package com.java.ejb;
+
+import java.util.List;
+
+public class DoctorsDaoImpl implements DoctorsDAO{
+
+	@Override
+	public List<Doctors> showDoctorsDao() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

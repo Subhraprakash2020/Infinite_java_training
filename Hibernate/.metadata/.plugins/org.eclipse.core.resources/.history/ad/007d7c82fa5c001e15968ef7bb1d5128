@@ -1,0 +1,18 @@
+package com.java.hib;
+
+import java.util.List;
+
+import org.hibernate.SessionFactory;
+
+public class EmployDAOImpl implements EmployDAO {
+	
+	SessionFactory sf;
+	Session session;
+
+	@Override
+	public List<Employ> showEmployDao() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

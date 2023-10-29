@@ -1,0 +1,42 @@
+package com.java.hms;
+
+public class Doctor {
+	private int drid;
+	private String drname;
+	private String dept;
+	public int getDrid() {
+		return drid;
+	}
+	public void setDrid(int drid) {
+		this.drid = drid;
+	}
+	public String getDrname() {
+		return drname;
+	}
+	public void setDrname(String drname) {
+		this.drname = drname;
+	}
+	public String getDept() {
+		return dept;
+	}
+	public void setDept(String dept) {
+		this.dept = dept;
+	}
+	@Override
+	public String toString() {
+		return "Doctor [drid=" + drid + ", drname=" + drname + ", dept=" + dept + "]";
+	}
+	public Doctor(int drid, String drname, String dept) {
+		super();
+		this.drid = drid;
+		this.drname = drname;
+		this.dept = dept;
+	}
+	public Doctor() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	
+}

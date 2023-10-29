@@ -1,0 +1,67 @@
+package com.java.agent;
+
+public class Agent {
+	private int agentId;
+	private String name;
+	private String city;
+	private Gender gender;
+	private int maritialStatus;
+	private double basic;
+	public int getAgentId() {
+		return agentId;
+	}
+	public void setAgentId(int agentId) {
+		this.agentId = agentId;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public Gender getGender() {
+		return gender;
+	}
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+	public int getMaritialStatus() {
+		return maritialStatus;
+	}
+	public void setMaritialStatus(int maritialStatus) {
+		this.maritialStatus = maritialStatus;
+	}
+	public double getBasic() {
+		return basic;
+	}
+	public void setBasic(double basic) {
+		this.basic = basic;
+	}
+	@Override
+	public String toString() {
+		return "Agent [agentId=" + agentId + ", name=" + name + ", city=" + city + ", gender=" + gender
+				+ ", maritialStatus=" + maritialStatus + ", basic=" + basic + "]";
+	}
+	public Agent(int agentId, String name, String city, Gender gender, int maritialStatus, double basic) {
+		super();
+		this.agentId = agentId;
+		this.name = name;
+		this.city = city;
+		this.gender = gender;
+		this.maritialStatus = maritialStatus;
+		this.basic = basic;
+	}
+	public Agent() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	
+}

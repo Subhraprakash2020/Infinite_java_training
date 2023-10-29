@@ -1,0 +1,48 @@
+package com.java.ejb;
+
+import java.util.Random;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+public class CustomerImpl {
+	SessionFactory sf;
+	Session session;
+	
+	public static int generateOtp() {
+		Random r = new Random(System.currentTimeMillis());
+		return ((1 + r.nextInt(2)) * 10000 + r.nextInt(10000));
+	}
+	
+	public String createAccount(Customer customer) {
+		SessionFactory sf = null;
+	    Session session = null;
+	    Transaction transaction = null;
+
+	    try {
+	        sf = SessionHelper.getConnection();
+	        session = sf.openSession();
+	        transaction = session.beginTransaction();
+
+	        int otp = generateOtp();
+
+	        session.save(customer);
+
+	        // Send OTP via email
+	      
+
+	        transaction.commit();
+	        return "PatientLogin.jsp?faces-redirect=true";
+	    } catch (Exception e) {
+	        // Handle exceptions appropriately (e.g., log or re-throw)
+	        e.printStackTrace();
+	        return "An error occurred.";
+	    } finally {
+	        if (session != null) {
+	            session.close();
+	        }
+	    }
+		
+	}
+}

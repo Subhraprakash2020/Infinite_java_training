@@ -1,0 +1,10 @@
+package com.java.client;
+
+import org.jboss.naming.InitialContextFactoryBean;
+
+public class Main {
+	public static void main(String[] args) {
+		CalculationRemote service = 
+				(CalculationRemote) new InitialContextFactoryBean().lookup("Calculation/remote");
+	}
+}

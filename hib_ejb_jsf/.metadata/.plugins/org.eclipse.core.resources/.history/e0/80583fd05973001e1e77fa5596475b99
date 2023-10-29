@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.java.ejb.CustPolicy" table="Customer_Policy">
+        <id name="policyId" type="int">
+            <column name="PolicyId"/>
+            <generator class="identity"/>
+        </id>
+        <property name="custId" type="int">
+            <column name="Cust_Id"/>
+        </property>
+        <property name="insId" type="int">
+            <column name="Insurance_id"/>
+        </property>
+        <property name="insAmount" type="java.math.Decimal">
+            <column name="InsuranceAmount" precision="10" scale="2"/>
+        </property>
+        <property name="paymode" type="java.lang.String">
+            <column name="PayMode"/>
+        </property>
+        <property name="initialAmount" type="java.math.Decimal">
+            <column name="InitialAmount" precision="10" scale="2"/>
+        </property>
+        <property name="regdDate" type="java.util.Date">
+            <column name="RegisterDate"/>
+        </property>
+    </class>
+</hibernate-mapping>

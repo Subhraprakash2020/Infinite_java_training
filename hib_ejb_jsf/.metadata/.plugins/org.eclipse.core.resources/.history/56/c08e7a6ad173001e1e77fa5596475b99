@@ -1,0 +1,16 @@
+package com.java.ejb;
+
+import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+public class InsurancePlanImpl {
+	public List<InsurancePlan> showInsurancePlanDao() {
+		SessionFactory sf = SessionHelper.getConnection();
+		Session session = sf.openSession();
+		Criteria cr = session.createCriteria(InsurancePlan.class);
+		return cr.list();
+	}
+}

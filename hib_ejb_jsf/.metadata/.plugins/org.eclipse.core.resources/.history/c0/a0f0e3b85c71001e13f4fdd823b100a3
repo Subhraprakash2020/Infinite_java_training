@@ -1,0 +1,10 @@
+package com.java.ejb;
+
+public class CustAuth {
+	private int authId;
+	private int custId;
+	private String userName;
+	private String passcode;
+	private String otp;
+	private String status;
+}

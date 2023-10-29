@@ -1,0 +1,11 @@
+package com.java.ejb;
+
+import java.sql.SQLException;
+import java.util.List;
+
+public class EmployEjbImpl {
+	public List<Employ> showEmployEjb() throws ClassNotFoundException, SQLException{
+		EmployEjbBeanRemote remote = RemoteHelper.lookupRemoteStatelessEmploy();
+		return remote.showEmploy();
+	}
+}

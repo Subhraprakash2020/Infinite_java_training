@@ -1,0 +1,10 @@
+package com.java.ejb;
+
+
+
+public class SessionHelper {
+
+	public static SessionFactory getConnection() {
+		return new AnnotationConfiguration().configure().buildSessionFactory();
+	}
+}

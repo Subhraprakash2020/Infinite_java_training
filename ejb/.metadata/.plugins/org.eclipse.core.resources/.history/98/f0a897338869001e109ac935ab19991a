@@ -1,0 +1,10 @@
+package com.java.client;
+
+import javax.naming.spi.InitialContextFactory;
+
+public class Main {
+	public static void main(String[] args) {
+		CalculationRemote service = 
+				(CalculationRemote) new InitialContextFactory().lookup("Calculation/remote");
+	}
+}

@@ -1,0 +1,30 @@
+package com.java.ejb;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class PatientDaoImpl implements PatientDAO{
+	Connection connection;
+	PreparedStatement pst;
+	
+	@Override
+	public String addPatatientDao(Patient patient) throws ClassNotFoundException, SQLException {
+		connection = ConnectionHelper.getConnection();
+		String cmd = "Insert into patient_master(pid, name, age, weight, gender, address, phoneno"
+				+ "disease, doctor_id";
+        PreparedStatement pst = connection.prepareStatement(cmd);
+        pst.setString(1, patient.getPid());
+        pst.setString(2, patient.getName());
+        pst.setInt(3, patient.getAge());
+        pst.setInt(4, patient.getWeight());
+        pst.setString(4, patient.getGender());
+        pst.setString(5, patient.getAddress());
+        pst.setString(6, patient.getPhoneno());
+        pst.setString(7, patient.getDisease());
+        pst.setString(8, patient.getDoctorid());
+
+		return null;
+	}
+
+}

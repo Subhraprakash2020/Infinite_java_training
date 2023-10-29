@@ -1,0 +1,21 @@
+package com.java.hms;
+
+import java.util.Map;
+
+import javax.faces.context.FacesContext;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+public class PatientDaoImpl {
+	SessionFactory sf;
+	Session session;
+	
+	public String addPatient(Patient patient) {
+		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		SessionFactory sf = SessionHelper.getConnection();
+		Session session = sf.openSession();
+		Criteria cr = session.createCriteria(Patient.class);
+	}
+}

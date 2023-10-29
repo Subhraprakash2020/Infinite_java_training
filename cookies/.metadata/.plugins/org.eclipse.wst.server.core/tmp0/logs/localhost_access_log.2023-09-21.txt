@@ -1,0 +1,16 @@
+127.0.0.1 - - [21/Sep/2023:00:18:16 +0530] "GET / HTTP/1.1" 404 1074
+127.0.0.1 - - [21/Sep/2023:00:20:35 +0530] "GET / HTTP/1.1" 404 1074
+0:0:0:0:0:0:0:1 - - [21/Sep/2023:00:20:35 +0530] "GET /Customer_Otp/SignUp.html HTTP/1.1" 200 602
+0:0:0:0:0:0:0:1 - - [21/Sep/2023:00:21:16 +0530] "POST /Customer_Otp/SignUpServlet HTTP/1.1" 200 24
+0:0:0:0:0:0:0:1 - - [21/Sep/2023:00:22:26 +0530] "GET /Customer_Otp/SignUp.html HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [21/Sep/2023:00:22:27 +0530] "GET /Customer_Otp/SignUp.html HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [21/Sep/2023:00:22:27 +0530] "GET /Customer_Otp/SignUp.html HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [21/Sep/2023:00:22:28 +0530] "GET /Customer_Otp/SignUp.html HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [21/Sep/2023:00:22:28 +0530] "GET /Customer_Otp/SignUp.html HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [21/Sep/2023:00:22:28 +0530] "GET /Customer_Otp/SignUp.html HTTP/1.1" 304 -
+127.0.0.1 - - [21/Sep/2023:00:29:43 +0530] "GET / HTTP/1.1" 404 1074
+0:0:0:0:0:0:0:1 - - [21/Sep/2023:00:30:38 +0530] "GET /Customer_Otp/SignUp.html HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [21/Sep/2023:00:30:44 +0530] "GET /Customer_Otp/SignUp.html HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [21/Sep/2023:00:30:47 +0530] "GET /Customer_Otp/SignUp.html HTTP/1.1" 304 -
+127.0.0.1 - - [21/Sep/2023:00:32:04 +0530] "GET / HTTP/1.1" 404 1074
+127.0.0.1 - - [21/Sep/2023:00:37:28 +0530] "GET / HTTP/1.1" 404 1074

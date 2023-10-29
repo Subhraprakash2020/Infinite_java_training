@@ -1,0 +1,13 @@
+package com.java.ejb;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.naming.NamingException;
+
+public class RoomEjbImpl {
+	public List<Room> showRoomTypeEjb() throws NamingException, ClassNotFoundException, SQLException{
+		DoctorEjbBeanRemote remote = RemoteHelper.lookupRemoteStatelessEmploy();
+		return remote.showRoomType();
+	}
+}

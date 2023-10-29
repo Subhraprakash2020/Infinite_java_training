@@ -1,0 +1,10 @@
+package com.java.ejb;
+
+import org.hibernate.SessionFactory;
+
+public class Dummy {
+
+	public static void main(String[] args) {
+		SessionFactory sf = SessionHelper.getConnection();
+	}
+}

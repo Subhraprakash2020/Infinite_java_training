@@ -1,0 +1,58 @@
+package com.java.ejb;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
+
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.naming.NamingException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+public class EmployEjbImpl {
+	public List<Employ> showEmployEjb() throws ClassNotFoundException, SQLException, NamingException{
+		EmployEjbBeanRemote remote = RemoteHelper.lookupRemoteStatelessEmploy();
+		return remote.showEmploy();
+	}
+	
+	public String searchEmployEjb(int empno) throws ClassNotFoundException, SQLException, NamingException {
+		EmployEjbBeanRemote remote = RemoteHelper.lookupRemoteStatelessEmploy();
+		Employ employ = remote.searchEmploy(empno);
+		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		sessionMap.put("editEmploy", employ);
+		return "UpdateEmploy.jsp?faces-redrict=true";
+	}
+	
+	public String addEmploy(Employ employ) throws NamingException, ClassNotFoundException, SQLException {
+		EmployEjbBeanRemote remote = RemoteHelper.lookupRemoteStatelessEmploy();
+		return remote.addEmploy(employ);
+	}
+//	public String addEmploy(Employ employ) throws NamingException, ClassNotFoundException, SQLException, IOException {
+//	    EmployEjbBeanRemote remote = RemoteHelper.lookupRemoteStatelessEmploy();
+//	    String result = remote.addEmploy(employ);
+//
+//	    if (result.equals("success")) {
+//	        // Successfully added the employee. Now, let's add some state and redirect.
+//	        // You can use a session attribute to add state.
+//	        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+//	        HttpSession session = request.getSession();
+//	        session.setAttribute("message", "Employee added successfully");
+//
+//	        // Redirect to EmployDaoTable.jsp
+//	        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+//	        ec.redirect("EmployDaoTable.jsp");
+//	    } else {
+//	        // Handle the error or provide a message to the user.
+//	    }
+//
+//	    return result;
+//	}
+
+	
+	public String deleteEmploy(int empno) {
+		EmployEjbBeanRemote remote = RemoteHelper.lookupRemoteStatelessEmploy();
+		return remore
+	}
+}

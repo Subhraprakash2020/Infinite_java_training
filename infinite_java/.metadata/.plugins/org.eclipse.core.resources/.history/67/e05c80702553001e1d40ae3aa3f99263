@@ -1,0 +1,46 @@
+package com.java.inventory;
+
+import java.sql.SQLException;
+import java.util.Scanner;
+
+public class PlaceOrderMain {
+
+    public static void main(String[] args) {
+    	Scanner sc = new Scanner(System.in);
+        OrderDAO dao = new OrederImpl();
+
+        try {
+            while (true) {
+                System.out.println("Enter stock id (or 'q' to quit):");
+                String stockId = sc.next();
+
+                if (stockId.equalsIgnoreCase("q")) {
+                    break; // Exit the loop if the user enters 'q'
+                }
+
+                System.out.println("Enter quantity:");
+                int orderQuantity = sc.nextInt();
+
+                // Validate the order quantity
+                if (orderQuantity <= 0) {
+                    System.out.println("Invalid quantity. Please enter a positive quantity.");
+                    continue; // Continue to the next iteration of the loop
+                }
+
+                String orderId = dao.createOrder(stockId, orderQuantity);
+
+                if (orderId != null) {
+                    System.out.println("Order placed successfully. Order ID: " + orderId);
+                } else {
+                    System.out.println("Order not placed. Insufficient quantity or other issues.");
+                }
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        } finally {
+            sc.close(); // Close the scanner when done
+        }
+
+        
+    }
+}

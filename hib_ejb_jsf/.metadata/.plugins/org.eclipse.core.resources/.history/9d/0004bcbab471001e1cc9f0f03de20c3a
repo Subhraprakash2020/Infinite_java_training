@@ -1,0 +1,50 @@
+package com.java.ejb;
+
+import java.util.Random;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+public class CustomerImpl {
+	SessionFactory sf;
+	Session session;
+	
+	public static int generateOtp() {
+		Random r = new Random(System.currentTimeMillis());
+		return ((1 + r.nextInt(2)) * 10000 + r.nextInt(10000));
+	}
+	
+	public String createAccount(Customer customer) {
+		 try {
+		        // Create a Hibernate Configuration and configure it (you may need to specify your configuration details)
+		        Configuration config = new Configuration();
+		        config.configure();
+		        sf = config.buildSessionFactory();
+		        
+		        session = sf.openSession();
+		        transaction = session.beginTransaction();
+		        
+		        // Save the customer object to the database
+		        session.save(customer);
+		        
+		        transaction.commit();
+		        return "CustomerLogin.jsp?faces-redirect=true";
+		    } catch (Exception e) {
+		        // Handle exceptions appropriately (e.g., log or re-throw)
+		        if (transaction != null) {
+		            transaction.rollback();
+		        }
+		        e.printStackTrace(); // Replace with proper error handling
+		        return "ErrorPage.jsp"; // Redirect to an error page
+		    } finally {
+		        if (session != null) {
+		            session.close();
+		        }
+		        if (sf != null) {
+		            sf.close();
+		        }
+		    }
+		
+	}
+}

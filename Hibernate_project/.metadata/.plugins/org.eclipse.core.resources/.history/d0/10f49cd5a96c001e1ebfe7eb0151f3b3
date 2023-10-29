@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:body>
+	<h2>Create Employ</h2>
+	<h:form>
+		<h2 style="text-align: center" class="col-sm-4">Patient Record</h2>
+	  Patient name
+	  <h:inputText id="empno" value="#{patient.name}" />
+		<br></br>
+	  Age
+	  <h:inputText id="name" value="#{patient.age}" />
+		<br></br>
+	  weight
+	  <h:inputText id="gender" value="#{patient.weight}" />
+		<br></br>
+	  Gender
+	  	  <h:inputText id="dept" value="#{patient.gender}" />
+		<br></br>
+	 Designation
+	 	  <h:inputText id="desig" value="#{employ.desig}" />
+		<br></br>
+	 Address
+	 	  <h:inputText id="basic" value="#{patient.address}" />
+		<br></br>
+		Phoneno
+	 	  <h:inputText id="basic" value="#{patient.phoneno}" />
+		<br></br>
+		Disease
+	 	  <h:inputText id="basic" value="#{patient.disease}" />
+		<br></br>
+		Doctor Id
+	 	  <h:inputText id="basic" value="#{patient.doctorid}" />
+		<br></br>
+		<h:commandButton value="Save" action="#{eDao.addEmployDao(employ)}"></h:commandButton>
+
+	</h:form>
+
+
+</h:body>
+
+</html>

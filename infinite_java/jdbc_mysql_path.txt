@@ -1,0 +1,2 @@
+Class.forName("com.mysql.cj.jdbc.Driver");
+Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/infinite_auguest23","root","subhra");

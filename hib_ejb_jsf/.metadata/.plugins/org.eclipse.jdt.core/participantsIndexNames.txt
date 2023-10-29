@@ -1,0 +1,7 @@
+INDEX VERSION 1.132
+D:\hib_ejb_jsf\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1325560600.index
+\IMSClient2\src\main\java
+D:\hib_ejb_jsf\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4191498203.index
+\JsfHibJsp\src\main\java
+D:\hib_ejb_jsf\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1132229705.index
+\IMSClient\src\main\java

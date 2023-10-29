@@ -1,0 +1,13 @@
+package com.java.ejb;
+
+import java.util.Date;
+
+public class CustPolicy {
+	private int policyId;
+	private int custId;
+	private int insId;
+	private double insAmount;
+	private String paymode;
+	private double initialAmount;
+	private Date regdDate;
+}

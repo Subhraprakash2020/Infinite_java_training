@@ -1,0 +1,32 @@
+package com.java.inventory;
+
+import java.sql.SQLException;
+import java.util.Scanner;
+
+public class PlaceOrderMain {
+
+    public static void main(String[] args) {
+        OrderDAO orderDAO = new OrederImpl(); // Replace with your actual implementation
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the stock ID to order: ");
+        String stockIdToOrder = scanner.next();
+
+        System.out.print("Enter the quantity to order: ");
+        int quantityToOrder = scanner.nextInt();
+
+        try {
+            String orderId = orderDAO.createOrder(stockIdToOrder, quantityToOrder);
+
+            if (orderId != null) {
+                System.out.println("Order placed successfully. Order ID: " + orderId);
+            } else {
+                System.out.println("Order not placed. Insufficient quantity or other issues.");
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        } finally {
+            scanner.close(); // Close the scanner to avoid resource leak
+        }
+    }
+}

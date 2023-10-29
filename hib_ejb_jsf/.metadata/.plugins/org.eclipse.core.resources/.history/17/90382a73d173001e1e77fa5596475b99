@@ -1,0 +1,33 @@
+package com.java.ejb;
+
+import java.util.List;
+import java.util.Map;
+
+import javax.faces.context.FacesContext;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+public class InsurancePlanImpl {
+	SessionFactory sf;
+	Session session;
+	public List<InsurancePlan> showInsurancePlanDao() {
+		SessionFactory sf = SessionHelper.getConnection();
+		Session session = sf.openSession();
+		Criteria cr = session.createCriteria(InsurancePlan.class);
+		return cr.list();
+	}
+	public String getInsurancePlans(String insuranceId) {
+		sf = SessionHelper.getConnection();
+		session = sf.openSession();
+		Map<String,Object> sessionMap =
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap();	
+		Criteria cr = session.createCriteria(InsurancePlans.class);
+		cr.add(Restrictions.eq("insId", insuranceId));
+		List<InsurancePlans>insList=cr.list();
+		sessionMap.put("insList", insList);
+ 
+		return"ShowInsPlans2.jsp?faces-redirect=true";		
+	}
+}

@@ -1,0 +1,16 @@
+package com.java.hib;
+
+public class ValidateMain {
+	public static void main(String[] args) {
+		Login log = new Login();
+		log.setUserName("ariz");
+		log.setPassCode("123");
+		Login login = new LoginDAOImpl().authenticate(log);
+		if(login!=null) {
+			System.out.println("Correct");
+		}
+		else {
+			System.out.println("Invalid");
+		}
+	}
+}

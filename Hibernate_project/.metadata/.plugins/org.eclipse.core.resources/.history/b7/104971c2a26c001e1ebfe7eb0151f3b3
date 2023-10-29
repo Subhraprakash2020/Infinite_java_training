@@ -1,0 +1,9 @@
+package com.java.hms;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+public class DoctorsDaoImpl {
+	SessionFactory sf;
+	Session session;
+}

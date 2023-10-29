@@ -1,0 +1,70 @@
+package com.java.ejb;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.faces.event.ValueChangeEvent;
+
+public class RoomDaoImpl implements RoomDAO{
+	
+	Connection connection;
+	PreparedStatement pst;
+	
+	public String localCode;
+	
+	
+	
+	public String getLocalCode() {
+		return localCode;
+	}
+
+	public void setLocalCode(String localCode) {
+		this.localCode = localCode;
+	}
+	
+	
+	public void roomLocaleCodeChanged(ValueChangeEvent e){
+		//assign new value to localeCode
+		this.localCode = e.getNewValue().toString();
+		System.out.println(this.localCode);
+	}
+
+	@Override
+	public List<String> showRoomType() throws ClassNotFoundException, SQLException {
+		connection = ConnectionHelper.getConnection();
+		String cmd = "select DISTINCT room_type from room_master";
+		pst = connection.prepareStatement(cmd);
+		ResultSet rs = pst.executeQuery();
+		List<String> roomList = new ArrayList<>();
+		while(rs.next()) {
+			roomList.add(rs.getString("room_type"));
+		}
+		return roomList;
+	}
+
+	@Override
+	public List<Room> showRoomNo(String roomType) throws ClassNotFoundException, SQLException {
+	    connection = ConnectionHelper.getConnection();
+	    String cmd = "SELECT room_no, room_type, status FROM room_master WHERE room_type = ? AND status = 'VACANT'";
+	    pst = connection.prepareStatement(cmd);
+	    pst.setString(1, roomType); // Set the room type parameter
+	    ResultSet rs = pst.executeQuery();
+	    List<Room> roomList = new ArrayList<Room>();
+
+	    while (rs.next()) {
+	        Room room = new Room();
+	        room.setRoomno(rs.getString("room_no"));
+	        room.setRoomtype(rs.getString("room_type"));
+	        room.setStatus(rs.getString("status"));
+	        roomList.add(room);
+	    }
+
+	    return roomList;
+	}
+
+	
+}

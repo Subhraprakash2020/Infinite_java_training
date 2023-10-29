@@ -1,0 +1,15 @@
+package com.java.hib;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+public class LoginDAOImpl implements LoginDAO{
+	SessionFactory sf;
+	Session session;
+
+	@Override
+	public String addUser(Login login) {
+		
+	}
+
+}

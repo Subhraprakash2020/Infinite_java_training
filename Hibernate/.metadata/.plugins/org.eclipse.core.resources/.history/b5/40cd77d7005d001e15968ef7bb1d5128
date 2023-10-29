@@ -1,0 +1,29 @@
+package com.java.hib;
+
+import java.util.List;
+import java.util.Scanner;
+
+import org.hibernate.Query;
+import org.hibernate.Transaction;
+
+public class EmployDeleteMain {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int empno;
+		System.out.println("Enter employ no");
+		EmployDAO dao = new EmployDAOImpl();
+		Employ employList = dao.searchEmployDao(empno);
+		
+			
+		if(employList.size() > 0) {
+			Employ employee = employList.get(0);
+			Transaction transction = session.beginTransaction();
+			session.delete(employee);
+			transction.commit();
+			System.out.println("*** Record Deleted ***");
+		}
+		else {
+			System.out.println("*** Employ Record Not Found ***");
+		}
+	}
+}
