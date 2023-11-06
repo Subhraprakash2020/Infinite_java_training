@@ -1,0 +1,18 @@
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.RemoteException;
+
+public class Server {
+	public static void main(String[] args) {
+		try {
+			Calc calc = new CalcImpl();
+			Hello hello = new HelloImpl();
+			Naming.rebind("localhost", calc);
+			System.out.println("Calsulation Server Started Wating for clients");
+		} catch (RemoteException | MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+}

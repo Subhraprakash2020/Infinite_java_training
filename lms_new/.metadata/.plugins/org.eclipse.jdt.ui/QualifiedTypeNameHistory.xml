@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+    <fullyQualifiedTypeName name="com.java.lms.LeaveDetails"/>
+    <fullyQualifiedTypeName name="com.java.lms.Employee"/>
+    <fullyQualifiedTypeName name="com.java.lms.EmployeeDAO"/>
+    <fullyQualifiedTypeName name="com.java.lms.EmployeeDAOImpl"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="com.java.lms.ConnectionHelper"/>
+    <fullyQualifiedTypeName name="com.java.lms.LeaveDAOImpl"/>
+</qualifiedTypeNameHistroy>

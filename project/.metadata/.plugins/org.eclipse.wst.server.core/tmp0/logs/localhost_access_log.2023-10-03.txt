@@ -1,0 +1,9 @@
+127.0.0.1 - - [03/Oct/2023:18:23:47 +0530] "GET / HTTP/1.1" 404 1074
+0:0:0:0:0:0:0:1 - - [03/Oct/2023:18:23:48 +0530] "GET /OtpApp/ForgotPassword.html HTTP/1.1" 200 759
+0:0:0:0:0:0:0:1 - - [03/Oct/2023:18:23:54 +0530] "POST /OtpApp/ForgotPasswordServlet HTTP/1.1" 200 -
+127.0.0.1 - - [03/Oct/2023:18:25:04 +0530] "GET / HTTP/1.1" 404 1074
+0:0:0:0:0:0:0:1 - - [03/Oct/2023:18:25:05 +0530] "GET /OtpApp/ForgotPassword.html HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [03/Oct/2023:18:25:10 +0530] "POST /OtpApp/ForgotPasswordServlet HTTP/1.1" 200 -
+0:0:0:0:0:0:0:1 - - [03/Oct/2023:18:26:01 +0530] "GET /OtpApp/Login.html HTTP/1.1" 200 943
+0:0:0:0:0:0:0:1 - - [03/Oct/2023:18:26:09 +0530] "GET /OtpApp/ForgotPassword.html HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [03/Oct/2023:18:26:14 +0530] "POST /OtpApp/ForgotPasswordServlet HTTP/1.1" 200 -
